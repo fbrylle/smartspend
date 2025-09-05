@@ -1,0 +1,9 @@
+{% extends 'main.html' %} {% block content %}
+<h1>{{loan.name}}</h1>
+<p>{{loan.description}}</p>
+<ul>
+  {% for payment in payments %} {% if loan.id == payment.loan.id %}
+  <li>{{payment.amount}} -- {{payment.created}}</li>
+  {% endif %} {% endfor %}
+</ul>
+{%endblock%}
