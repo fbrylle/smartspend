@@ -27,7 +27,9 @@ def addLoan(request):
     if request.method == 'POST':
         form = LoanForm(request.POST)
         if form.is_valid():
-            form.save()
+            loan = form.save(commit=False)
+            loan.user = request.user
+            loan.save()
             return redirect('loans')
     context = {'form':form}
     return render(request, 'loans/loans_form.html', context)

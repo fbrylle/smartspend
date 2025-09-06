@@ -7,6 +7,7 @@ class LoanForm(ModelForm):
         fields = ['loan_name','description', 'created']
 
 
+
 class PaymentForm(ModelForm):
     class Meta:
         model = Payment

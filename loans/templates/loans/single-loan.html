@@ -1,5 +1,5 @@
 {% extends 'main.html' %} {% block content %}
-<h1>{{loan.name}}</h1>
+<h1>{{loan.loan_name}}</h1>
 <p>{{loan.description}}</p>
 <ul>
   {% for payment in payments %} {% if loan.id == payment.loan.id %}
