@@ -22,6 +22,11 @@
             >Home</a
           >
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+        {% if request.user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add-payment' %}">Add Payment</a>
         </li>
@@ -29,11 +34,16 @@
           <a class="nav-link" href="{% url 'add-loan' %}">Add Loan</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
+        {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'register' %}">Register</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>

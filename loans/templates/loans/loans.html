@@ -1,6 +1,6 @@
-{% extends 'main.html' %} {% block content %}
+{% extends 'main.html' %} {% block content %} 
+{% if request.user.is_authenticated %}
 <h1>Loan Lists</h1>
-
 <table>
   <tr>
     <th>Loan</th>
@@ -15,5 +15,6 @@
   </tr>
   {% endfor %}
 </table>
-
-{% endblock content %}
+{% else %}
+<h1>Welcome to SmartSpend</h1>
+{% endif %} {% endblock content %}
