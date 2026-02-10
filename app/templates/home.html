@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}SmartSpend | Master Your Finances{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='partials/home.css')}}">
+<style>
+  
+  .text-gradient {
+    background: linear-gradient(45deg, #0d6efd, #0dcaf0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .hero-image {
+    border-radius: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+
+  
+  .floating-badge {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: absolute;
+    z-index: 2;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Badge Positions */
+  .badge-1 { top: 15%; left: -5%; }
+  .badge-2 { bottom: 15%; right: -5%; }
+
+  .btn-pill {
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+  }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="container col-xxl-8 px-4 py-md-5 py-4">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    
+    <div class="col-10 col-sm-8 col-lg-6 mx-auto position-relative">
+      
+      <div class="floating-badge badge-1 d-none d-lg-flex">
+        <div class="bg-primary bg-opacity-10 d-flex align-items-center justify-content-center rounded-circle" style="width: 40px; height: 40px;">
+          <i class="bi bi-folder2-open text-primary"></i>
+        </div>
+        <div>
+          <span class="d-block fw-bold small">Smart Buckets</span>
+          <span class="text-muted small">Auto-organized</span>
+        </div>
+      </div>
+
+      <img src="{{ url_for('static', filename='assets/hero.jpg') }}" 
+           class="hero-image d-block mx-auto img-fluid" 
+           alt="SmartSpend Dashboard" 
+           width="700" height="500" loading="lazy">
+
+      <div class="floating-badge badge-2 d-none d-lg-flex">
+        <div class="bg-success bg-opacity-10 d-flex align-items-center justify-content-center rounded-circle" style="width: 40px; height: 40px;">
+          <i class="bi bi-shield-check text-success"></i>
+        </div>
+        <div>
+          <span class="d-block fw-bold small">Data Integrity</span>
+          <span class="text-muted small">Verified Entries</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 text-center text-lg-start">
+      <div class="d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
+        <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-3 py-2 fw-semibold">
+          <i class="bi bi-lightning-charge-fill me-1"></i> The Future of Expense Tracking
+        </span>
+      </div>
+
+      <h1 class="display-4 fw-bold text-body-emphasis lh-1 mb-3">
+        Take control of your <span class="text-gradient">financial future.</span>
+      </h1>
+      <p class="lead mb-4 px-md-0 px-2 text-muted">
+        Stop wondering where your money went. SmartSpend uses <span class="fw-semibold text-dark">structured categorization</span> to turn messy spending into clear, actionable insights.
+      </p>
+      
+      <div class="d-grid gap-3 d-md-flex justify-content-md-start">
+        <a href="{{url_for('main.login')}}" class="btn btn-primary btn-lg px-lg-5 py-3 fw-bold btn-pill shadow-sm">
+          Start Tracking Free
+        </a>
+        <a href="{{url_for('main.features')}}" class="btn btn-outline-secondary btn-lg px-lg-5 py-3 btn-pill">
+          Explore Features
+        </a>
+      </div>
+
+      <div class="mt-4 text-muted small d-flex align-items-center justify-content-center justify-content-lg-start">
+        <div class="bg-success bg-opacity-10 p-1 rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+            <i class="bi bi-check-lg text-success" style="font-size: 0.8rem;"></i>
+        </div>
+        <span>User isolation & <strong>Encrypted Category Scoping</strong></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}

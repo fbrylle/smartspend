@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Add Expense{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('main.expense', id=category.id) }}" class="text-decoration-none">{{ category.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Expense</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-0 pt-4">
+                    <div class="text-center mb-2">
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3">
+                            {{ category.name }}
+                        </span>
+                    </div>
+                    <h3 class="fw-bold text-center mb-0">Record Expense</h3>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('main.add_expense', id=category.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                        <div class="mb-3">
+                            <label for="amount" class="form-label fw-semibold">Amount</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-white border-end-0 text-muted">₱</span>
+                                <input type="number" 
+                                       step="0.01" 
+                                       name="amount" 
+                                       id="amount" 
+                                       class="form-control border-start-0 ps-0 shadow-none" 
+                                       placeholder="0.00" 
+                                       required 
+                                       autofocus>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-semibold">Description</label>
+                            <input type="text" 
+                                   name="description" 
+                                   id="description" 
+                                   class="form-control shadow-none" 
+                                   placeholder="What did you spend on?" 
+                                   required>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="fas fa-check-circle me-2"></i>Save Expense
+                            </button>
+                            <a href="{{ url_for('main.expense', id=category.id) }}" class="btn btn-link text-muted text-decoration-none small">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

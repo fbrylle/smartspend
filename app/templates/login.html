@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Sign In | SmartSpend{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='partials/login.css') }}">
+{% endblock styles %}
+
+{% block content %}
+<main class="d-flex align-items-center min-vh-100 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-5 col-xl-4">
+                
+                <div class="card border-0 shadow-lg" style="border-radius: 1.5rem;">
+                    <div class="card-body p-4 p-md-5">
+                        
+                        <div class="text-center mb-5">
+                            <div class="bg-primary bg-gradient shadow-sm mb-3 d-flex align-items-center justify-content-center mx-auto rounded-circle" 
+                                style="width: 80px; height: 80px;">
+                                <i class="bi bi-wallet2 text-white fs-1"></i>
+                            </div>
+                            
+                            <h2 class="fw-bold text-dark">Welcome <span class="text-primary">Back</span></h2>
+                            <p class="text-muted">Enter your credentials to access your dashboard</p>
+                        </div>
+
+                        <form method="POST" action="{{ url_for('main.login') }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-semibold small text-uppercase tracking-wide">Username</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0 text-muted">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" name="username" id="username" 
+                                           class="form-control border-start-0 ps-0 shadow-none py-2" 
+                                           placeholder="your username" required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-semibold small text-uppercase tracking-wide">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0 text-muted">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" name="password" id="password" 
+                                           class="form-control border-start-0 ps-0 shadow-none py-2" 
+                                           placeholder="••••••••" required>
+                                </div>
+                            </div>
+
+                            <div class="d-grid mb-4">
+                                <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm rounded-pill py-2">
+                                    Sign In
+                                </button>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="text-muted small mb-0">Don't have an account?</p>
+                                <a href="{{ url_for('main.sign_up') }}" class="text-primary fw-bold text-decoration-none small">
+                                    Create a free account
+                                </a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                
+                <p class="text-center text-muted mt-4 small">
+                    &copy; 2026 SmartSpend. All rights reserved.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

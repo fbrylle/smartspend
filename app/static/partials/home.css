@@ -1,0 +1,45 @@
+  .hero-image-container {
+    position: relative;
+  }
+
+  .hero-image {
+    border-radius: 2rem;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+  }
+  
+  
+  .floating-badge {
+    position: absolute;
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .badge-1 { top: 10%; left: -5%; }
+  .badge-2 { bottom: 15%; right: -5%; animation-delay: 1.5s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @media (max-width: 992px) {
+    .floating-badge { display: none; }
+    .display-4 { font-size: 2.8rem; }
+  }
+
+  .text-gradient {
+    background: linear-gradient(45deg, #0d6efd, #0dcaf0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .btn-pill {
+    border-radius: 50rem;
+    transition: all 0.3s;
+  }

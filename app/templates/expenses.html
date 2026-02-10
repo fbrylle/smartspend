@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category.name }} Expenses | SmartSpend{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4 align-items-end">
+        <div class="col-md-8">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('main.dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+                </ol>
+            </nav>
+            <h1 class="fw-bold mb-0 text-dark">{{ category.name }}</h1>
+            <p class="text-muted">Detailed transaction history for this category.</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="{{ url_for('main.add_expense', id=category.id) }}" class="btn btn-primary shadow-sm rounded-pill px-4 fw-bold">
+                <i class="bi bi-plus-lg me-2"></i>Add Expense
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4 border-0 text-uppercase small fw-bold text-muted">Date</th>
+                            <th class="border-0 text-uppercase small fw-bold text-muted">Description</th>
+                            <th class="border-0 text-end text-uppercase small fw-bold text-muted">Amount</th>
+                            <th class="border-0 text-center pe-4 text-uppercase small fw-bold text-muted" style="width: 120px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set displayed = namespace(found=false) %}
+                        {% for expense in expenses %}
+                            {% if category.id == expense.category_id %}
+                                {% set displayed.found = true %}
+                                <tr>
+                                    <td class="ps-4 text-secondary small">
+                                        {{ expense.created_at.strftime('%b %d, %Y') if expense.created_at else 'N/A' }}
+                                    </td>
+                                    <td class="fw-medium text-dark">
+                                        {{ expense.description if expense.description else 'General Expense' }}
+                                    </td>
+                                    <td class="text-end fw-bold text-primary">
+                                        ₱{{ "{:,.2f}".format(expense.amount) }}
+                                    </td>
+                                    <td class="text-center pe-4">
+                                        <a href="{{ url_for('main.edit_expense', category_id=category.id, expense_id=expense.id) }}" 
+                                           class="btn btn-sm btn-outline-primary border-0 rounded-3 shadow-none" 
+                                           title="Edit Expense">
+                                            <i class="bi bi-pencil-square fs-5"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if not displayed.found %}
+                        <tr>
+                            <td colspan="4" class="text-center py-5">
+                                <div class="py-4">
+                                    <i class="bi bi-receipt-cutoff fs-1 text-light mb-3 d-block"></i>
+                                    <p class="text-muted mb-0">No expenses found in <strong>{{ category.name }}</strong>.</p>
+                                    <small class="text-secondary">Click "Add Expense" to get started.</small>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-link text-decoration-none text-muted small">
+            <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock content %}

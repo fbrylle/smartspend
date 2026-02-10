@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Expense | SmartSpend{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('main.dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('main.expense', id=category.id) }}" class="text-decoration-none">{{ category.name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Expense</li>
+                </ol>
+            </nav>
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <div class="text-center mb-4">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-receipt fs-3"></i>
+                        </div>
+                        <h3 class="fw-bold text-dark">Modify Expense</h3>
+                        <p class="text-muted small">Update the details of your transaction below.</p>
+                    </div>
+
+                    <form method="POST" action="{{ url_for('main.edit_expense', category_id=category.id, expense_id=expense.id) }}" class="needs-validation">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                        <div class="mb-4">
+                            <label for="amount" class="form-label small fw-bold text-uppercase text-muted">Amount</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-light-subtle rounded-start-3">$</span>
+                                <input type="number" 
+                                       step="0.01" 
+                                       name="amount" 
+                                       id="amount" 
+                                       class="form-control form-control-lg rounded-end-3 shadow-sm border-light-subtle" 
+                                       value="{{ expense.amount }}" 
+                                       placeholder="0.00" 
+                                       required 
+                                       autofocus>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="description" class="form-label small fw-bold text-uppercase text-muted">Description</label>
+                            <input type="text" 
+                                   name="description" 
+                                   id="description" 
+                                   class="form-control form-control-lg rounded-3 shadow-sm border-light-subtle" 
+                                   value="{{ expense.description }}" 
+                                   placeholder="e.g., Grocery Shopping" 
+                                   required>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold shadow-sm">
+                                Save Changes
+                            </button>
+                            <a href="{{ url_for('main.expense', id=category.id) }}" class="btn btn-link link-secondary text-decoration-none small">
+                                Cancel and Go Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="text-muted small">
+                    <i class="bi bi-shield-lock-fill me-1"></i> Your data is secured with SmartSpend Intelligence.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

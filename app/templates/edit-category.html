@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Category | SmartSpend{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('main.dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Category</li>
+                </ol>
+            </nav>
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-pencil-square fs-3"></i>
+                        </div>
+                        <h3 class="fw-bold text-dark">Rename Category</h3>
+                        <p class="text-muted small">Update the label for this spending bucket.</p>
+                    </div>
+
+                    <form method="POST" action="{{ url_for('main.edit_category', id=category.id) }}" class="needs-validation">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                        <div class="mb-4">
+                            <label for="name" class="form-label small fw-bold text-uppercase text-muted">Category Name</label>
+                            <input type="text" 
+                                   name="name" 
+                                   id="name" 
+                                   class="form-control form-control-lg rounded-3 shadow-sm border-light-subtle" 
+                                   value="{{ category.name }}" 
+                                   placeholder="e.g., Monthly Groceries"
+                                   required 
+                                   autofocus>
+                            <div class="form-text mt-2 small">
+                                <i class="bi bi-info-circle me-1"></i> Use a clear name to help track your expenses better.
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold shadow-sm">
+                                Save Changes
+                            </button>
+                            <a href="{{ url_for('main.dashboard') }}" class="btn btn-link link-secondary text-decoration-none small">
+                                Cancel and Go Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="text-muted small">
+                    <i class="bi bi-shield-lock-fill me-1"></i> Your data is secured with SmartSpend Intelligence.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

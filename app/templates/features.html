@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Features | SmartSpend Intelligence{% endblock title %}
+
+{% block styles %}
+<style>
+  .feature-card-custom {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+  .feature-card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.08);
+    border-color: #0d6efd40;
+  }
+  .feature-icon-badge {
+    width: 60px;
+    height: 60px;
+    background: #f8f9fa;
+    color: #0d6efd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    flex-shrink: 0;
+  }
+  .text-gradient {
+    background: linear-gradient(45deg, #0d6efd, #0dcaf0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  @media (max-width: 768px) {
+    .mobile-stack { flex-direction: column; text-align: center; align-items: center !important; }
+    .feature-icon-badge { margin-right: 0 !important; margin-bottom: 1rem; }
+  }
+</style>
+{% endblock styles %}
+
+{% block content %}
+
+<section class="py-5 text-center container">
+  <div class="row py-3 py-md-5">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-3 py-2 mb-3 fw-bold">PRO TOOLS</span>
+      <h1 class="display-4 fw-bold text-body-emphasis">Financial clarity, <span class="text-gradient">reimagined.</span></h1>
+      <p class="lead text-muted px-2">Stop guessing where your money goes. SmartSpend turns raw expenses into organized, actionable intelligence.</p>
+    </div>
+  </div>
+</section>
+
+<div class="container px-4 py-2">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    
+    <div class="col">
+      <div class="d-flex align-items-start mobile-stack feature-card-custom">
+        <div class="feature-icon-badge me-3">
+          <i class="bi bi-folder-fill fs-3"></i>
+        </div>
+        <div>
+          <h3 class="fw-bold mb-2 fs-5 text-body-emphasis">Smart Buckets</h3>
+          <p class="mb-0 text-muted small">Organize spending into custom categories. We ensure every peso has a home and a purpose.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="d-flex align-items-start mobile-stack feature-card-custom">
+        <div class="feature-icon-badge me-3">
+          <i class="bi bi-shield-check fs-3"></i>
+        </div>
+        <div>
+          <h3 class="fw-bold mb-2 fs-5 text-body-emphasis">Data Integrity</h3>
+          <p class="mb-0 text-muted small">Our "Schema-Lock" validation prevents messy data entry. Your financial records stay clean and accurate.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="d-flex align-items-start mobile-stack feature-card-custom">
+        <div class="feature-icon-badge me-3">
+          <i class="bi bi-graph-up-arrow fs-3"></i>
+        </div>
+        <div>
+          <h3 class="fw-bold mb-2 fs-5 text-body-emphasis">Volume Analysis</h3>
+          <p class="mb-0 text-muted small">Track transaction density per category. Instantly see which "spending bucket" is filling up too fast.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col">
+      <div class="d-flex align-items-start mobile-stack feature-card-custom">
+        <div class="feature-icon-badge me-3">
+          <i class="bi bi-intersect fs-3"></i>
+        </div>
+        <div>
+          <h3 class="fw-bold mb-2 fs-5 text-body-emphasis">Zero Duplication</h3>
+          <p class="mb-0 text-muted small">Intelligent unique-constraints ensure you don't double-log categories or clutter your dashboard.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="d-flex align-items-start mobile-stack feature-card-custom">
+        <div class="feature-icon-badge me-3">
+          <i class="bi bi-lock-fill fs-3"></i>
+        </div>
+        <div>
+          <h3 class="fw-bold mb-2 fs-5 text-body-emphasis">Private Scoping</h3>
+          <p class="mb-0 text-muted small">Bank-grade user isolation. Your categories and expenses are visible only to you—never shared.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="d-flex align-items-start mobile-stack feature-card-custom">
+        <div class="feature-icon-badge me-3">
+          <i class="bi bi-lightning-charge-fill fs-3"></i>
+        </div>
+        <div>
+          <h3 class="fw-bold mb-2 fs-5 text-body-emphasis">Instant Aggregation</h3>
+          <p class="mb-0 text-muted small">Real-time total calculations across all categories. No refresh needed to see your net spending.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-lg-6 text-center text-lg-start">
+      <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Structured Tracking vs. Messy Notes</h2>
+      <p class="lead">Manual spreadsheets fail because they lack structure. SmartSpend enforces organization so your data is always ready for analysis.</p>
+      <ul class="list-unstyled d-inline-block text-start">
+        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Enforced Category Relationships</li>
+        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Real-time Expense Summation</li>
+        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> One-click category drill-down</li>
+      </ul>
+    </div>
+    <div class="col-lg-6">
+      <div class="p-4 p-md-5 bg-primary bg-opacity-10 rounded-5 shadow-sm border border-primary border-opacity-10 text-center">
+          <div class="bg-primary bg-gradient shadow-sm mb-3 d-flex align-items-center justify-content-center mx-auto rounded-circle" 
+               style="width: 100px; height: 100px;">
+              <i class="bi bi-wallet2 text-white display-4"></i>
+          </div>
+          <p class="mt-3 fw-bold text-primary text-uppercase tracking-wider">Engineered for Accuracy</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <div class="p-4 p-md-5 text-center bg-dark text-white rounded-5 shadow-lg position-relative overflow-hidden">
+    <div class="position-relative z-1">
+        <h2 class="fw-bold mb-3">Ready to master your money?</h2>
+        <p class="col-lg-6 mx-auto mb-4 opacity-75">
+          Join users who value structure, security, and smart spending.
+        </p>
+        <div class="d-flex cta-container gap-3 justify-content-center">
+          <a href="{{url_for('main.login')}}" class="btn btn-primary btn-lg px-5 rounded-pill fw-bold">Sign In Now</a>
+          <a href="{{url_for('main.sign_up')}}" class="btn btn-outline-light btn-lg px-5 rounded-pill">Create Account</a>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

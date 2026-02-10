@@ -1,0 +1,25 @@
+# Environment Variables (CRITICAL)
+.env
+
+# Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+
+# Database
+instance/
+*.db
+*.sqlite
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

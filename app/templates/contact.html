@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us | SmartSpend Intelligence{% endblock title %}
+
+{% block styles %}
+<style>
+    .contact-card {
+        border-radius: 1.5rem;
+        border: none;
+        transition: transform 0.3s ease;
+    }
+    .info-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .form-control {
+        border-radius: 0.75rem;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid #e0e0e0;
+    }
+    .form-control:focus {
+        box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+        border-color: #0d6efd;
+    }
+    .text-gradient {
+        background: linear-gradient(45deg, #0d6efd, #0dcaf0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-body-emphasis">Get in <span class="text-gradient">touch</span></h1>
+        <p class="lead text-muted mx-auto" style="max-width: 600px;">
+            Have questions about your categories or need technical support? Our team is here to help you master your finances.
+        </p>
+    </div>
+
+    <div class="row g-5">
+        <div class="col-lg-5">
+            <div class="d-flex align-items-center mb-4">
+                <div class="info-icon me-3">
+                    <i class="bi bi-geo-alt-fill fs-4"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0 fw-bold">Our Location</h5>
+                    <p class="text-muted mb-0 small">Cebu, Philippines</p>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-4">
+                <div class="info-icon me-3">
+                    <i class="bi bi-envelope-at-fill fs-4"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0 fw-bold">Email Support</h5>
+                    <p class="text-muted mb-0 small">francis.brylle.bustamante@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="card bg-primary bg-opacity-10 border-0 p-4 rounded-4 mt-5">
+                <h5 class="fw-bold mb-3"><i class="bi bi-patch-question-fill me-2"></i>Quick Help</h5>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2"><a href="#" class="text-decoration-none small text-primary">How do I create a new category?</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none small text-primary">Is my data secure?</a></li>
+                    <li><a href="#" class="text-decoration-none small text-primary">How to export my expense history?</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card shadow-sm contact-card p-4 p-md-5">
+                <form action="#" method="POST">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Juan Dela Cruz" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold">Email Address</label>
+                            <input type="email" class="form-control" placeholder="juan@example.com" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold">Subject</label>
+                            <select class="form-select form-control">
+                                <option selected>General Inquiry</option>
+                                <option>Technical Issue</option>
+                                <option>Billing Question</option>
+                                <option>Feature Request</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold">Your Message</label>
+                            <textarea class="form-control" rows="5" placeholder="How can we help you today?" required></textarea>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm">
+                                <i class="bi bi-send-fill me-2"></i>Send Message
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
