@@ -50,8 +50,8 @@ def sign_up():
                 flash('User has been created', 'success')
                 return redirect(url_for('main.login'))
     except ValidationError as e:
-        error = e.errors()[0]['msg']
-        flash(f"{error}", 'danger')
+        for error in e.errors():
+            flash(error['msg'], "danger")
     return render_template('signup.html')
 
 
