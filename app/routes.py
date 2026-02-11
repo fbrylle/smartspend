@@ -33,22 +33,25 @@ def login():
                 flash('Invalid username or password', 'danger')
 
         except ValidationError as e:
-            flash('An error occurred.')
+            flash('Check your inputs.', "warning")
     return render_template('login.html')
 
 
 @main_app.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
 
-    if request.method == "POST":
-        data = request.form.to_dict()
-        valid_data = RegistrationSchema(**data)
+    try:
+        if request.method == "POST":
+            data = request.form.to_dict()
+            valid_data = RegistrationSchema(**data)
 
-        if valid_data:
-            create_new_user(valid_data)
-            flash('User has been created', 'success')
-            return redirect(url_for('main.login'))
-
+            if valid_data:
+                create_new_user(valid_data)
+                flash('User has been created', 'success')
+                return redirect(url_for('main.login'))
+    except ValidationError as e:
+        error = e.errors()[0]['msg']
+        flash(f"{error}", 'danger')
     return render_template('signup.html')
 
 

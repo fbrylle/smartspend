@@ -1,5 +1,6 @@
 from app.extensions import db
 from app.models import Users
+from pydantic import ValidationError
 
 
 def create_new_user(valid_data):
