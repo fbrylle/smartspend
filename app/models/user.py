@@ -12,7 +12,7 @@ class Users(db.Model, UserMixin):
 
     # relationship
     categories = db.relationship('Category', backref='owner', lazy=True)
-    expenses = db.relationship('Expense', backref='author', lazy=True)
+    expenses = db.relationship('Expense', backref='author', lazy=True, cascade="all, delete-orphan")
 
     @property
     def password(self):

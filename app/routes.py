@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, request, abort
 from flask_login import login_required, login_user, logout_user, current_user
-from .actions import create_new_user, authenticate_user, create_new_category, get_category_data, get_category_data_by_name, create_new_expense, get_expense_data, get_total_expenses, get_daily_expense, get_monthly_expense, edit_category_name, edit_expense_service, get_category_data_by_id, get_expense_data_by_id, delete_category_by_id
+from .actions import create_new_user, authenticate_user, create_new_category, get_category_data, get_category_data_by_name, create_new_expense, get_expense_data, get_total_expenses, get_daily_expense, get_monthly_expense, edit_category_name, edit_expense_service, get_category_data_by_id, get_expense_data_by_id, delete_category_by_id, delete_expense_by_id
 from .schemas import LoginSchema, RegistrationSchema, CategorySchema, ExpenseSchema
 from pydantic import ValidationError
 from app.models import Category, Expense
@@ -168,3 +168,18 @@ def delete_category(category_id):
             return redirect(url_for('main.dashboard'))
         else:
             abort(403)
+
+
+@main_app.route('/delete/<category_id>/<expense_id>', methods=['POST'])
+def delete_expense(category_id, expense_id):
+
+    category = Category.query.get_or_404(category_id)
+
+    success, message = delete_expense_by_id(category.id, expense_id, current_user.id)
+    if success:
+        flash(message, 'success')
+        return redirect(url_for('main.expense', id=category_id))
+    else:
+        abort(403)
+    
+    

@@ -17,3 +17,19 @@ def delete_category_by_id(category_id, current_user):
         return False, "An error occured."
     
 
+def delete_expense_by_id(category_id, expense_id, current_user):
+    """ Delete expense """
+
+    try:
+        expense = Expense.query.filter_by(category_id=category_id, id=expense_id, user_id=current_user).first()
+        if not expense:
+            return False, 'Expense not found or unauthorized.'
+        db.session.delete(expense)
+        db.session.commit()
+        return True, 'Successfully deleted an expense.'
+    except Exception as e:
+        db.session.rollback()
+        print(e)
+        return False, f"{e}"
+    
+
