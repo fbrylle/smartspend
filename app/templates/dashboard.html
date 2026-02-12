@@ -96,9 +96,38 @@
                         
                         <div class="d-grid pt-2 border-top">
                             <a href="{{ url_for('main.expense', id=category.id) }}" 
-                               class="btn btn-link text-primary text-decoration-none fw-bold btn-sm py-2">
+                               class="btn btn-link text-primary text-decoration-none fw-bold btn-sm py-2 text-start">
                                 <i class="fas fa-receipt me-2"></i>View Detailed Report
                             </a>
+                            
+                            <button type="button" class="btn btn-outline-danger btn-sm border-0 fw-bold text-start mt-1" 
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal{{ category.id }}">
+                                <i class="fas fa-trash-alt me-2"></i>Delete Category
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="deleteModal{{ category.id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg" style="border-radius: 1rem;">
+                        <div class="modal-header border-0 pt-4 px-4">
+                            <h5 class="modal-title fw-bold">Delete Category?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body px-4">
+                            <p class="text-muted">Are you sure you want to delete <strong>"{{ category.name }}"</strong>?</p>
+                            <div class="alert alert-warning py-2 small border-0 bg-warning bg-opacity-10 text-warning-emphasis">
+                                <i class="fas fa-exclamation-triangle me-2"></i> This will also delete all associated expense records.
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0 pb-4 px-4">
+                            <button type="button" class="btn btn-light rounded-pill px-4 fw-bold" data-bs-dismiss="modal">Cancel</button>
+                            <form method="post" action="{{url_for('main.delete_category', category_id=category.id)}}">
+                                <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                                <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold shadow-sm">Confirm Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>

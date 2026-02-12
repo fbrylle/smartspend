@@ -9,7 +9,7 @@ class Category(db.Model):
 
     # relationship
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    expenses = db.relationship('Expense', backref='owner', lazy=True)
+    expenses = db.relationship('Expense', backref='owner', lazy=True, cascade="all, delete-orphan")
 
     
     __table_args__ = (

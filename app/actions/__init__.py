@@ -6,3 +6,4 @@ from .create_new_expense import create_new_expense
 from .get_expense_data import get_expense_data, get_total_expenses, get_daily_expense, get_monthly_expense, get_expense_data_by_id
 from .edit_category_data import edit_category_name
 from .edit_expense_data import edit_expense_service
+from .delete_data import delete_category_by_id
