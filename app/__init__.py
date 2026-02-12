@@ -22,8 +22,7 @@ def create_app():
     login_manager.init_app(app)
     csrf.init_app(app)
     
-    with app.app_context():
-        from . import models
+    
 
 
     app.register_blueprint(main_app)
