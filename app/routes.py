@@ -93,6 +93,8 @@ def add_category():
     if request.method == "POST":
         success, message = create_new_category(current_user, request.form.to_dict())
         flash(message, 'success' if success else 'danger')
+        if not success:
+            return redirect(url_for('main.add_category'))
         return redirect(url_for('main.dashboard'))
 
     return render_template('add-category.html')
@@ -135,6 +137,8 @@ def edit_category(id):
     if request.method == "POST":
         success, message = edit_category_name(id, current_user.id, request.form.to_dict())
         flash(message, 'success' if success else 'danger')
+        if not success:
+            return redirect(url_for('main.edit_category', id=id))
         return redirect(url_for('main.dashboard'))
     
 
@@ -155,6 +159,8 @@ def edit_expense(category_id, expense_id):
     if request.method == "POST":
         success, message = edit_expense_service(category_id, expense_id, current_user.id, request.form.to_dict())
         flash(message, 'success' if success else 'danger')
+        if not success:
+            return redirect(request.referrer)
         return redirect(url_for('main.expense', id=category.id))
     
 
