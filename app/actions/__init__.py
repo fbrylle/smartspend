@@ -7,3 +7,5 @@ from .get_expense_data import get_expense_data, get_total_expenses, get_daily_ex
 from .edit_category_data import edit_category_name
 from .edit_expense_data import edit_expense_service
 from .delete_data import delete_category_by_id, delete_expense_by_id
+from .add_new_loan import new_loan
+from .get_loan_data import all_loan

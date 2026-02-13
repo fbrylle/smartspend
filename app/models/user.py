@@ -11,8 +11,10 @@ class Users(db.Model, UserMixin):
     password_hash = db.Column(db.String(100), nullable=False)
 
     # relationship
-    categories = db.relationship('Category', backref='owner', lazy=True)
+    categories = db.relationship('Category', backref='owner', lazy=True, cascade="all, delete-orphan")
     expenses = db.relationship('Expense', backref='author', lazy=True, cascade="all, delete-orphan")
+    loans = db.relationship('Loan', backref='borrower', lazy=True, cascade="all, delete-orphan")
+    payments = db.relationship('Payment', backref='payer', lazy=True, cascade="all, delete-orphan")
 
     @property
     def password(self):

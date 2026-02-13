@@ -1,13 +1,15 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, request, abort
 from flask_login import login_required, login_user, logout_user, current_user
-from .actions import create_new_user, authenticate_user, create_new_category, get_category_data, get_category_data_by_name, create_new_expense, get_expense_data, get_total_expenses, get_daily_expense, get_monthly_expense, edit_category_name, edit_expense_service, get_category_data_by_id, get_expense_data_by_id, delete_category_by_id, delete_expense_by_id
+from .actions import create_new_user, authenticate_user, create_new_category, get_category_data, get_category_data_by_name, create_new_expense, get_expense_data, get_total_expenses, get_daily_expense, get_monthly_expense, edit_category_name, edit_expense_service, get_category_data_by_id, get_expense_data_by_id, delete_category_by_id, delete_expense_by_id, new_loan, all_loan
 from .schemas import LoginSchema, RegistrationSchema, CategorySchema, ExpenseSchema
 from pydantic import ValidationError
-from app.models import Category, Expense
+from app.models import Category, Expense, Loan
 from app.extensions import db
 
 main_app = Blueprint('main', __name__)
 
+
+# ----------START of Categories and Expenses Routes--------------------
 
 @main_app.route('/')
 def index():
@@ -72,11 +74,12 @@ def contact():
 @main_app.route('/dashboard')
 @login_required
 def dashboard():
+    loans = all_loan(current_user)
     categories = get_category_data(current_user)
     total_spent = get_total_expenses(current_user)
     daily_spent = get_daily_expense(current_user)
     monthly_spent = get_monthly_expense(current_user)
-    return render_template('dashboard.html', categories=categories, total_spent=total_spent, daily_spent=daily_spent, monthly_spent=monthly_spent)
+    return render_template('dashboard.html', categories=categories, total_spent=total_spent, daily_spent=daily_spent, monthly_spent=monthly_spent, loans=loans)
 
 
 @main_app.route('/logout')
@@ -189,4 +192,16 @@ def delete_expense(category_id, expense_id):
     else:
         abort(403)
     
-    
+
+# ----------END of Categories and Expenses Routes--------------------
+
+
+@main_app.route('/dashboard/add-loan', methods=['GET', 'POST'])
+@login_required
+def add_loan():
+
+    if request.method == 'POST':
+        success, message = new_loan(current_user.id, request.form.to_dict())
+        flash(message, 'success' if success else 'danger')
+        return redirect(url_for('main.dashboard'))
+    return render_template('add-loan.html')

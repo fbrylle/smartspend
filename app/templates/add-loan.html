@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Loan
+{% endblock title %}
+
+{% block content %}
+<form method='post' action="{{url_for('main.add_loan')}}">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+    <input type="text" name='name' class="form-control" required placeholder="Loan Name">
+    <input type="number" name='total_amount' class="form-control" required placeholder="Amount">
+    <button type="submit" class="btn btn-primary">Add</button>
+
+</form>
+{% endblock content %}
