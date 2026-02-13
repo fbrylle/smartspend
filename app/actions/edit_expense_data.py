@@ -23,7 +23,7 @@ def edit_expense_service(category_id, expense_id, user_id, form_data):
     
     except ValidationError as e:
         error_msg = e.errors()[0]['msg']
-        return False, f"Validation error: {error_msg}"
+        return False, f"{error_msg}"
     except Exception as e:
         db.session.rollback()
         return False, 'Internal error occurred. Contact the developer.'
