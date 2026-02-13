@@ -171,6 +171,7 @@ def delete_category(category_id):
 
 
 @main_app.route('/delete/<category_id>/<expense_id>', methods=['POST'])
+@login_required
 def delete_expense(category_id, expense_id):
 
     category = Category.query.get_or_404(category_id)
