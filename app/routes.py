@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, request, abort
 from flask_login import login_required, login_user, logout_user, current_user
 from .actions import create_new_user, authenticate_user, create_new_category, get_category_data, get_category_data_by_name, create_new_expense, get_expense_data, get_total_expenses, get_daily_expense, get_monthly_expense, edit_category_name, edit_expense_service, get_category_data_by_id, get_expense_data_by_id, delete_category_by_id, delete_expense_by_id, new_loan, all_loan
-from .schemas import LoginSchema, RegistrationSchema, CategorySchema, ExpenseSchema
+from .schemas import LoginSchema
 from pydantic import ValidationError
 from app.models import Category, Expense, Loan
 from app.extensions import db
@@ -43,18 +43,14 @@ def login():
 @main_app.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
 
-    try:
-        if request.method == "POST":
-            data = request.form.to_dict()
-            valid_data = RegistrationSchema(**data)
-
-            if valid_data:
-                create_new_user(valid_data)
-                flash('User has been created', 'success')
-                return redirect(url_for('main.login'))
-    except ValidationError as e:
-        for error in e.errors():
-            flash(error['msg'], "danger")
+    if request.method == "POST":
+        success, message = create_new_user(request.form.to_dict())
+        flash(message, 'success' if success else 'danger')
+        if not success:
+            return redirect(request.referrer)
+        return redirect(url_for('main.login'))
+        
+        return redirect(request.referrer)
     return render_template('signup.html')
 
 
