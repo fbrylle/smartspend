@@ -9,7 +9,7 @@ class RegistrationSchema(BaseModel):
 
     @field_validator('password', mode='after')
     @classmethod
-    def password_min_length(cls, v: SecretStr):
-        if len(v.get_secret_value()) < 8:
+    def password_min_length(cls, password: SecretStr):
+        if len(password.get_secret_value()) < 8:
             raise ValueError('Password must be at least 8 characters long')
-        return v
+        return password
