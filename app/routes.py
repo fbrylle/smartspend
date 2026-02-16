@@ -23,20 +23,24 @@ def login():
         return redirect(url_for('main.dashboard'))
 
     if request.method == 'POST':
-        data = request.form.to_dict()
+        form_data = request.form.to_dict()
         try:
-            valid_data = LoginSchema(**data) 
-            attempted_user = authenticate_user(valid_data)
-
-            if attempted_user and attempted_user.check_password(valid_data.password.get_secret_value()):
-                login_user(attempted_user)
-                flash(f'Welcome {attempted_user.fname}', 'success')
-                return redirect(url_for('main.dashboard'))
-            else:
-                flash('Invalid username or password', 'danger')
-
+            valid_data = LoginSchema(**form_data)
         except ValidationError as e:
-            flash('Check your inputs.', "warning")
+            custom_message = e.errors()[0]['msg']
+            clean_message = custom_message.replace("Value error, ", "")
+            flash(clean_message, 'danger')  
+            return redirect(request.referrer)
+        
+        user = authenticate_user(valid_data)
+        
+        if user and user.check_password(valid_data.password.get_secret_value()):
+            login_user(user)
+            flash(f'Welcome {user.fname}', 'success')
+            return redirect(url_for('main.dashboard'))
+        else:
+            flash('Incorrect email or password.', 'danger')
+            
     return render_template('login.html')
 
 
@@ -48,9 +52,6 @@ def sign_up():
         flash(message, 'success' if success else 'danger')
         if not success:
             return redirect(request.referrer)
-        return redirect(url_for('main.login'))
-        
-        return redirect(request.referrer)
     return render_template('signup.html')
 
 
